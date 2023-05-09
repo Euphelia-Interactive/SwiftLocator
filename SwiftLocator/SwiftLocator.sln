@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33110.190
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwiftLocator", "SwiftLocator\SwiftLocator.csproj", "{B6F866F1-C407-4A96-B4E8-6E7D64F264B8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B6F866F1-C407-4A96-B4E8-6E7D64F264B8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6F866F1-C407-4A96-B4E8-6E7D64F264B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6F866F1-C407-4A96-B4E8-6E7D64F264B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6F866F1-C407-4A96-B4E8-6E7D64F264B8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {63F10009-0988-4BF4-8738-5D851A8A1AEB}
+	EndGlobalSection
+EndGlobal
