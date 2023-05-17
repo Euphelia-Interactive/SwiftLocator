@@ -73,7 +73,7 @@ namespace SwiftLocatorTest
 
         private interface ITestTransient
         {
-            public string Name { get; set; }
+            string Name { get; set; }
         }
 
         private class TestTransient : ITestTransient

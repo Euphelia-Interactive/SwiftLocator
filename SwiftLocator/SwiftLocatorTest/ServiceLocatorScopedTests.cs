@@ -135,7 +135,7 @@ namespace SwiftLocatorTest
 
         private interface ITestScoped
         {
-            public string Name { get; set; }
+            string Name { get; set; }
         }
 
         private class TestScoped : ITestScoped

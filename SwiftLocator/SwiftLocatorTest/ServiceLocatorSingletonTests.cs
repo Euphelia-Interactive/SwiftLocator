@@ -93,7 +93,7 @@ namespace SwiftLocatorTest
 
         private interface ITestSinleton
         {
-            public string Name { get; set; }
+            string Name { get; set; }
         }
 
         private class TestSingleton : ITestSinleton
