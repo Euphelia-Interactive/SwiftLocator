@@ -7,7 +7,11 @@ namespace SwiftLocator.Services.ServiceLocatorServices
 {
     public class ScopedServiceLocator
     {
+#if NET5_0_OR_GREATER
         private static readonly Dictionary<string, Scope> _scopedScope = new();
+#else
+        private static readonly Dictionary<string, Scope> _scopedScope = new Dictionary<string, Scope>();
+#endif
 
         public static void Register(string scopeKey, Action<IScopedServiceRegistrator> registrationAction)
         {

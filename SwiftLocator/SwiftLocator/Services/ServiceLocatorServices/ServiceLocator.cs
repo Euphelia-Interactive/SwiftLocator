@@ -24,11 +24,17 @@ namespace SwiftLocator.Services.ServiceLocatorServices
             _transientScope.SetDependencyInjector(dependencyInjector);
 
             // Register scopes.
+#if NET5_0_OR_GREATER
             if(registerSingletonServices is not null)
                 registerSingletonServices(_singletonScope);
             if(registerTransientServices is not null)
                 registerTransientServices(_transientScope);
-
+#else
+            if(registerSingletonServices != null)
+                registerSingletonServices(_singletonScope);
+            if(registerTransientServices != null)
+                registerTransientServices(_transientScope);
+#endif
             // Test registration by building all instances.
             _singletonScope.BuildAllInstances();
             _transientScope.BuildAllInstances();
