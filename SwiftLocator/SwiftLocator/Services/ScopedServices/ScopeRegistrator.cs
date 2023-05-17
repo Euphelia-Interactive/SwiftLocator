@@ -7,8 +7,14 @@ namespace SwiftLocator.Services.ScopedServices
     public abstract class ScopeRegistrator : IServiceRegistrator
     {
         protected IDependencyInjector DependencyInjector;
+
+#if NET5_0_OR_GREATER
         protected readonly Dictionary<Type, Func<object>> ServiceFactories = new();
         protected readonly Dictionary<Type, Type> RealTypes = new();
+#else
+        protected readonly Dictionary<Type, Func<object>> ServiceFactories = new Dictionary<Type, Func<object>>();
+        protected readonly Dictionary<Type, Type> RealTypes = new Dictionary<Type, Type>();
+#endif
 
         protected abstract IServiceProvider ServiceProvider { get; }
 

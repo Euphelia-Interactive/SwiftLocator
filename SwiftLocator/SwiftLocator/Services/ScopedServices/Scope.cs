@@ -1,4 +1,10 @@
-﻿using SwiftLocator.Services.DependencyInjectorServices;
+﻿#if NET5_0_OR_GREATER
+// .NET 5.0 or higher code
+#else
+using SwiftLocator.Models;
+#endif
+
+using SwiftLocator.Services.DependencyInjectorServices;
 using System;
 using System.Collections.Generic;
 
@@ -6,11 +12,19 @@ namespace SwiftLocator.Services.ScopedServices
 {
     public class Scope : ScopeRegistrator, IScopedServiceRegistrator, IServiceProvider
     {
+#if NET5_0_OR_GREATER
         private readonly Dictionary<Type, object> _instances = new();
+#else
+        private readonly Dictionary<Type, object> _instances = new Dictionary<Type, object>();
+#endif
 
         public Scope()
         {
+#if NET5_0_OR_GREATER
             DependencyInjector = new DepedencyInjector(new(this));
+#else
+            DependencyInjector = new DepedencyInjector(new DependencyInjectorConfigurations(this));
+#endif
         }
 
         public new IReadOnlyDictionary<Type, Type> RealTypes => base.RealTypes;
