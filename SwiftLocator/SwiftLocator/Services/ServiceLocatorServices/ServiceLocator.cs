@@ -76,7 +76,7 @@ namespace SwiftLocator.Services.ServiceLocatorServices
         }
 
         /// <summary>
-        ///     This method usage is optional. It makes sure all instances can be build correctly.
+        ///     This method usage is optional. It makes sure all instances can be built correctly.
         /// </summary>
         public static void Build()
         {
@@ -86,7 +86,7 @@ namespace SwiftLocator.Services.ServiceLocatorServices
         }
 
         /// <summary>
-        ///     This method usage is optional. It makes sure all instances can be build correctly.
+        ///     This method usage is optional. It makes sure all instances can be built correctly.
         /// </summary>
         public static void Build(string scopeKey)
         {
