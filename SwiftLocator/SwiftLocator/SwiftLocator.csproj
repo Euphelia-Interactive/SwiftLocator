@@ -14,6 +14,7 @@
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
     <PackageTags>service locator, dependency injector</PackageTags>
     <PackageLicenseFile>LICENSE.md</PackageLicenseFile>
+    <IncludeContentInPack>true</IncludeContentInPack>
   </PropertyGroup>
 
   <ItemGroup>
