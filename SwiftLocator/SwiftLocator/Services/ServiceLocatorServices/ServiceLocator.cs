@@ -50,7 +50,6 @@ namespace SwiftLocator.Services.ServiceLocatorServices
             transientRegistrationAction(_transientScope);
         }
 
-
         public static void RegisterScoped(string scopeKey, Action<IScopedServiceRegistrator> registrationAction)
         {
             // Instantiate new scope.
