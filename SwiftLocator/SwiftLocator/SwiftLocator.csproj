@@ -16,8 +16,8 @@
     <IncludeContentInPack>true</IncludeContentInPack>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
-    <PackageReleaseNotes>More flexible Service Locator usage. 
-Merged both locator to a single one. 
+    <PackageReleaseNotes>More flexible Service Locator usage.
+Merged both locators into a single one. 
 Added dependency injection of transient, singleton services for scoped services.</PackageReleaseNotes>
     <AssemblyVersion></AssemblyVersion>
     <FileVersion></FileVersion>
