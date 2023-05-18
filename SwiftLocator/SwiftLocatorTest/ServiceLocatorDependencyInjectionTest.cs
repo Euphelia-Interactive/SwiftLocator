@@ -7,20 +7,21 @@ namespace SwiftLocatorTest
     public class ServiceLocatorDependencyInjectionTest
     {
         [TestMethod]
-        public void CreateInstanceWithDependencies_ForTransientAndSingleton_InjectsDependencies()
+        public void ServiceLocator_GetSingleton_ReturnsInstanceWithInjectedDependencies()
         {
-            ServiceLocator.Register(singletonRegistrator =>
-            {
-                singletonRegistrator.Register<ParentTestClass>();
-            },
-            transientRegistrator =>
-            {
-                transientRegistrator.Register<SecondChildInjectClass>();
-                transientRegistrator.Register<ChildInjectClass>();
-                transientRegistrator.Register<ChildChildInjectClass>();
-            });
+            // Arrange
+            ServiceLocator.RestartSingletonScope();
+            ServiceLocator.SingletonRegistrator.Register<ParentTestClass>();
+
+            ServiceLocator.TransientRegistrator
+                .Register<SecondChildInjectClass>()
+                .Register<ChildInjectClass>()
+                .Register<ChildChildInjectClass>();
+
+            // Act
             var singletonService = ServiceLocator.GetSingleton<ParentTestClass>();
 
+            // Assert
             Assert.IsNotNull(singletonService);
             Assert.IsNotNull(singletonService.InjectClass);
             Assert.IsNotNull(singletonService.InjectClass.ChildChildInjectClass);
@@ -30,18 +31,21 @@ namespace SwiftLocatorTest
         }
 
         [TestMethod]
-        public void CreateInstanceWithDependencies_ForScoped_InjectsDependencies()
+        public void ServiceLocator_GetScoped_ReturnsInstanceWithInjectedDependencies()
         {
+            // Arrange
             const string scopeKey = "test";
-            ScopedServiceLocator.Register(scopeKey, registrator =>
-            {
-                registrator.Register<ParentTestClass>();
-                registrator.Register<SecondChildInjectClass>();
-                registrator.Register<ChildInjectClass>();
-                registrator.Register<ChildChildInjectClass>();
-            });
-            var scopedService = ScopedServiceLocator.Get<ParentTestClass>(scopeKey);
 
+            ServiceLocator.GetScopedRegistrator(scopeKey)
+                .Register<ParentTestClass>()
+                .Register<SecondChildInjectClass>()
+                .Register<ChildInjectClass>()
+                .Register<ChildChildInjectClass>();
+
+            // Act
+            var scopedService = ServiceLocator.GetScoped<ParentTestClass>(scopeKey);
+
+            // Assert
             Assert.IsNotNull(scopedService);
             Assert.IsNotNull(scopedService.InjectClass);
             Assert.IsNotNull(scopedService.InjectClass.ChildChildInjectClass);
