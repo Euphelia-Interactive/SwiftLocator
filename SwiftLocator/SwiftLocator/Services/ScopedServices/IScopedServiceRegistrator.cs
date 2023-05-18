@@ -2,9 +2,9 @@
 {
     public interface IScopedServiceRegistrator : IServiceRegistrator
     {
-        void Register<T>(T instance);
+        IScopedServiceRegistrator Register<T>(T instance);
 
-        void Register<TInterface, TImplementation>(TImplementation instance) 
+        IScopedServiceRegistrator Register<TInterface, TImplementation>(TImplementation instance) 
             where TImplementation : TInterface;
     }
 }

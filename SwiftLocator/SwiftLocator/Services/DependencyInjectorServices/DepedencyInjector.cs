@@ -6,9 +6,14 @@ namespace SwiftLocator.Services.DependencyInjectorServices
 {
     public class DepedencyInjector : IDependencyInjector
     {
-        private readonly DependencyInjectorConfigurations _configurations;
+        private DependencyInjectorConfigurations _configurations;
         
         public DepedencyInjector(DependencyInjectorConfigurations configurations)
+        {
+            _configurations = configurations;
+        }
+
+        public void Reconfigure(DependencyInjectorConfigurations configurations)
         {
             _configurations = configurations;
         }

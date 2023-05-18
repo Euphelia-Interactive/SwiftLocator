@@ -4,14 +4,16 @@ namespace SwiftLocator.Services.ScopedServices
 {
     public interface IServiceRegistrator
     {
-        void Register<TInterface, TImplementation>()
+        IServiceRegistrator Register<TInterface, TImplementation>()
             where TImplementation : class, TInterface;
 
-        void Register<T>() where T : class;
+        IServiceRegistrator Register<T>() 
+            where T : class;
 
-        void Register<T>(Func<IServiceProvider, T> factory);
+        IServiceRegistrator Register<T>(Func<IServiceProvider, T> factory)
+            where T : class;
 
-        void Register<TInterface, TImplementation>(Func<IServiceProvider, TImplementation> factory)
+        IServiceRegistrator Register<TInterface, TImplementation>(Func<IServiceProvider, TImplementation> factory)
             where TImplementation : TInterface;
     }
 }
