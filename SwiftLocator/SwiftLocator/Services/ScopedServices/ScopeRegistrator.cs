@@ -23,30 +23,37 @@ namespace SwiftLocator.Services.ScopedServices
             DependencyInjector = dependencyInjector;
         }
 
-        public void Register<TInterface, TImplementation>() where TImplementation : class, TInterface
+        public IServiceRegistrator Register<TInterface, TImplementation>() where TImplementation : class, TInterface
         {
             ThrowTypeIsAlreadyRegistered<TInterface>();
 
             var type = typeof(TInterface);
             RealTypes.Add(type, typeof(TImplementation));
             ServiceFactories.Add(type, () => DependencyInjector.CreateInstanceWithDependencies<TInterface>());
+
+            return this;
         }
 
-        public void Register<T>() where T : class
+        public IServiceRegistrator Register<T>() where T : class
         {
             ThrowTypeIsAlreadyRegistered<T>();
 
             ServiceFactories.Add(typeof(T), () => DependencyInjector.CreateInstanceWithDependencies<T>());
+
+            return this;
         }
 
-        public void Register<T>(Func<IServiceProvider, T> factory)
+        public IServiceRegistrator Register<T>(Func<IServiceProvider, T> factory)
+            where T : class
         {
             ThrowTypeIsAlreadyRegistered<T>();
 
             ServiceFactories.Add(typeof(T), () => factory(ServiceProvider));
+
+            return this;
         }
 
-        public void Register<TInterface, TImplementation>(Func<IServiceProvider, TImplementation> factory) 
+        public IServiceRegistrator Register<TInterface, TImplementation>(Func<IServiceProvider, TImplementation> factory) 
             where TImplementation : TInterface
         {
             ThrowTypeIsAlreadyRegistered<TInterface>();
@@ -54,6 +61,8 @@ namespace SwiftLocator.Services.ScopedServices
             var type = typeof(TInterface);
             RealTypes.Add(type, typeof(TImplementation));
             ServiceFactories.Add(type, () => factory(ServiceProvider));
+
+            return this;
         }
 
         public void BuildAllInstances()

@@ -31,20 +31,24 @@ namespace SwiftLocator.Services.ScopedServices
 
         protected override IServiceProvider ServiceProvider => this;
 
-        public void Register<T>(T instance)
+        public IScopedServiceRegistrator Register<T>(T instance)
         {
             ThrowTypeIsAlreadyRegistered<T>();
 
             ServiceFactories.Add(typeof(T), () => instance);
+
+            return this;
         }
 
-        public void Register<TInterface, TImplementation>(TImplementation instance) where TImplementation : TInterface
+        public IScopedServiceRegistrator Register<TInterface, TImplementation>(TImplementation instance) where TImplementation : TInterface
         {
             ThrowTypeIsAlreadyRegistered<TInterface>();
 
             var type = typeof(TInterface);
             base.RealTypes.Add(type, typeof(TImplementation));
             ServiceFactories.Add(type, () => instance);
+
+            return this;
         }
 
         public object Get(Type type)
