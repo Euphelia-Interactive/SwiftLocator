@@ -16,10 +16,12 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '7.0.x' # Replace 'x' with the appropriate minor/patch version
+        dotnet-version: '7.0.x'
 
     - name: Restore NuGet packages
-      run: dotnet restore SwiftLocator.sln
+      run: |
+        dotnet restore SwiftLocator/SwiftLocator.csproj
+        dotnet restore SwiftLocatorTest/SwiftLocatorTest.csproj
 
     - name: Build the Solution
       run: dotnet build SwiftLocator.sln -c Release --no-restore
