@@ -27,5 +27,5 @@ jobs:
         
     - name: Build and Test
       run: |
-        dotnet build SwiftLocator/SwiftLocator.sln --configuration Release --framework net48
+        dotnet build SwiftLocator.sln --configuration Release --framework net48
         dotnet test SwiftLocatorTest/SwiftLocatorTest.csproj --no-build --configuration Release --framework net5.0 --logger:console
