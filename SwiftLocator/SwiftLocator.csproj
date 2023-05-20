@@ -26,11 +26,11 @@ Added .NET 4.8 Framework support.</PackageReleaseNotes>
   </PropertyGroup>
 
   <ItemGroup>
-    <None Include="..\..\Logo.png">
+    <None Include="..\Logo.png">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
-    <None Include="..\..\NuGet-README.md">
+    <None Include="..\NuGet-README.md">
       <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
