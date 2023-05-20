@@ -25,7 +25,12 @@ jobs:
         echo 'export PATH="/usr/share/dotnet:$PATH"' >> $HOME/.bashrc
         source $HOME/.bashrc
         
-    - name: Build and Test
+    - name: Build and Test .NET Framework
       run: |
-        dotnet build SwiftLocator.sln --configuration Release --framework net48
+        dotnet build SwiftLocator/SwiftLocator.csproj --configuration Release --framework net48
+        dotnet test SwiftLocatorTest/SwiftLocatorTest.csproj --no-build --configuration Release --framework net48 --logger:console
+
+    - name: Build and Test .NET Core
+      run: |
+        dotnet build SwiftLocator/SwiftLocator.csproj --configuration Release --framework net5.0
         dotnet test SwiftLocatorTest/SwiftLocatorTest.csproj --no-build --configuration Release --framework net5.0 --logger:console
