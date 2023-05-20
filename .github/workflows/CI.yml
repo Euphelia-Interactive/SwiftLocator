@@ -16,7 +16,7 @@ jobs:
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
-        dotnet-version: '7.0.x'
+        dotnet-version: '7.0.x' # Replace 'x' with the appropriate minor/patch version
 
     - name: Restore NuGet packages
       run: dotnet restore SwiftLocator.sln
@@ -24,5 +24,8 @@ jobs:
     - name: Build the Solution
       run: dotnet build SwiftLocator.sln -c Release --no-restore
 
-    - name: Test
-      run: dotnet test SwiftLocatorTest/SwiftLocatorTest.csproj --no-build --verbosity normal
+    - name: Test .NET Framework
+      run: dotnet test SwiftLocatorTest/SwiftLocatorTest.csproj --framework net48 --no-build --verbosity normal
+
+    - name: Test .NET Core
+      run: dotnet test SwiftLocatorTest/SwiftLocatorTest.csproj --framework net5.0 --no-build --verbosity normal
