@@ -27,7 +27,7 @@ jobs:
       run: dotnet build SwiftLocator.sln -c Release --no-restore
 
     - name: Test .NET Framework
-      run: dotnet test SwiftLocatorTest/SwiftLocatorTest.csproj --framework net48 --no-build --verbosity normal
+      run: dotnet vstest SwiftLocatorTest/bin/Debug/net48/SwiftLocatorTest.dll --logger:console;verbosity=detailed
 
     - name: Test .NET Core
       run: dotnet test SwiftLocatorTest/SwiftLocatorTest.csproj --framework net5.0 --no-build --verbosity normal
