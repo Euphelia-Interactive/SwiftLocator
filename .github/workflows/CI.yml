@@ -25,4 +25,4 @@ jobs:
       run: dotnet build SwiftLocator.sln -c Release --no-restore
 
     - name: Test
-      run: dotnet test -c Release --no-build --verbosity normal
+      run: dotnet test SwiftLocatorTest/SwiftLocatorTest.csproj --no-build --verbosity normal
