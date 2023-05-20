@@ -29,7 +29,10 @@ jobs:
         run: dotnet build SwiftLocator.sln --configuration Release --framework net5.0
 
       - name: Install .NET Core runtime
-        run: dotnet tool install --global dotnet-runtime-5.0
+        run: |
+          wget -q -O dotnet-install.sh https://dot.net/v1/dotnet-install.sh
+          chmod +x dotnet-install.sh
+          ./dotnet-install.sh --runtime dotnet --version 5.0.0
 
       - name: Test (.NET Framework)
         run: dotnet test SwiftLocatorTest/SwiftLocatorTest.csproj --no-build --configuration Release --framework net48 --logger:console
