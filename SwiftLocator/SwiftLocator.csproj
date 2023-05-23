@@ -16,13 +16,10 @@
     <IncludeContentInPack>true</IncludeContentInPack>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <RepositoryType>git</RepositoryType>
-    <PackageReleaseNotes>More flexible Service Locator usage.
-Merged both locators into a single one. 
-Added dependency injection of transient, singleton services for scoped services.
-Added .NET 4.8 Framework support.</PackageReleaseNotes>
+    <PackageReleaseNotes>Major dependency injection bug fix.</PackageReleaseNotes>
     <AssemblyVersion></AssemblyVersion>
     <FileVersion></FileVersion>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
   </PropertyGroup>
 
   <ItemGroup>
