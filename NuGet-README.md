@@ -1,4 +1,5 @@
 # ![Logo](https://raw.githubusercontent.com/Euphelia-Interactive/SwiftLocator/master/Logo.png) SwiftLocator
+[![Build Status](https://github.com/Euphelia-Interactive/SwiftLocator/actions/workflows/CI.yml/badge.svg)](https://github.com/Euphelia-Interactive/SwiftLocator/actions/workflows/CI.yml)
 [![NuGet version (SwiftLocator)](https://img.shields.io/nuget/v/SwiftLocator.svg?style=flat-square)](https://www.nuget.org/packages/SwiftLocator/)
 
 Description
@@ -79,4 +80,4 @@ var scopedService = ServiceLocator.GetScoped<ParentTestClass>(scopeKey);
 Urls
 ---
 - [NuGet Package](https://www.nuget.org/packages/SwiftLocator)
-- [License](SwiftLocator/SwiftLocator/LICENSE.md)
+- [License](https://github.com/Euphelia-Interactive/SwiftLocator/blob/main/LICENSE.md)
