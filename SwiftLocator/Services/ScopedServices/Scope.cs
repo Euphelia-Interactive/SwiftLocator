@@ -10,7 +10,7 @@ using System.Collections.Generic;
 
 namespace SwiftLocator.Services.ScopedServices
 {
-    public class Scope : ScopeRegistrator, IScopedServiceRegistrator, IServiceProvider
+    public class Scope : ScopeRegistrator, IScopedServiceRegistrator, IServiceProvider, IServiceInstanceProvider
     {
 #if NET5_0_OR_GREATER
         private readonly Dictionary<Type, object> _instances = new();
@@ -67,6 +67,11 @@ namespace SwiftLocator.Services.ScopedServices
         public T Get<T>()
         {
             return (T)Get(typeof(T));
+        }
+
+        public bool TryGetInstance(Type type, out object instance)
+        {
+            return _instances.TryGetValue(type, out instance);
         }
     }
 }

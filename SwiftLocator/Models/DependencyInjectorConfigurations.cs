@@ -5,11 +5,11 @@ namespace SwiftLocator.Models
 {
     public class DependencyInjectorConfigurations
     {
-        public DependencyInjectorConfigurations(params IServiceProvider[] serviceProviders)
+        public DependencyInjectorConfigurations(params IServiceInstanceProvider[] serviceProviders)
         {
-            ServiceProviders = serviceProviders;
+            ServiceInstanceProviders = serviceProviders;
         }
 
-        public IReadOnlyCollection<IServiceProvider> ServiceProviders { get; }
+        public IReadOnlyCollection<IServiceInstanceProvider> ServiceInstanceProviders { get; }
     }
 }

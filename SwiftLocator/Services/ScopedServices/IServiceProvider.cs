@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace SwiftLocator.Services.ScopedServices
 {
@@ -7,6 +6,5 @@ namespace SwiftLocator.Services.ScopedServices
     {
         T Get<T>();
         object Get(Type type);
-        IReadOnlyDictionary<Type, Type> RealTypes { get; }
     }
 }

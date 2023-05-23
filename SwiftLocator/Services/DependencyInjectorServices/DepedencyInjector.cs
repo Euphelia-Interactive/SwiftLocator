@@ -37,7 +37,10 @@ namespace SwiftLocator.Services.DependencyInjectorServices
             for (int i = 0; i < parameters.Length; i++)
             {
                 var parameterType = parameters[i].ParameterType;
-                resolvedParameters[i] = CreateInstanceWithDependencies(parameterType);
+                if (TryGetInstance(parameterType, out var instance))
+                    resolvedParameters[i] = instance;
+                else
+                    resolvedParameters[i] = CreateInstanceWithDependencies(parameterType);
             }
 
             return Activator.CreateInstance(realType, resolvedParameters);
@@ -46,10 +49,19 @@ namespace SwiftLocator.Services.DependencyInjectorServices
         private Type GetRealType(Type representativeType)
         {
             // Try get type from real types otherwise use same type.
-            foreach (var serviceProvider in _configurations.ServiceProviders)
+            foreach (var serviceProvider in _configurations.ServiceInstanceProviders)
                 if (serviceProvider.RealTypes.TryGetValue(representativeType, out var realType))
                     return realType;
             return representativeType;
+        }
+
+        private bool TryGetInstance(Type type, out object instance)
+        {
+            foreach(var instanceProvider in _configurations.ServiceInstanceProviders)
+                if(instanceProvider.TryGetInstance(type, out instance))
+                    return true;
+            instance = null;
+            return false;
         }
     }
 }
