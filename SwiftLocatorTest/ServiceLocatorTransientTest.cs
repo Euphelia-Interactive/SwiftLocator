@@ -80,6 +80,26 @@ namespace SwiftLocatorTest
             Assert.AreNotEqual(singletonServiceSecondInstance.Name, testString);
         }
 
+        [TestMethod]
+        public void ServiceLocator_GetTransient_DependencyInjectionReturnsSameInstanceEveryTime()
+        {
+            // Arrange
+            ServiceLocator.RestartTransientScope();
+            ServiceLocator.TransientRegistrator
+                .Register<ITestTransient, TestTransient>()
+                .Register<TaskTransientSameInstance>()
+                .Register<TaskTransientScecondSameInstance>();
+
+            // Act
+            var instance = ServiceLocator.GetTransient<ITestTransient>();
+            var secondInstance = ServiceLocator.GetTransient<TaskTransientSameInstance>().GetTestTransient();
+            var thirdInstance = ServiceLocator.GetTransient<TaskTransientScecondSameInstance>().GetTestTransient();
+
+            // Assert
+            Assert.AreNotSame(instance, secondInstance);
+            Assert.AreNotSame(instance, thirdInstance);
+        }
+
         private interface ITestTransient
         {
             string Name { get; set; }
@@ -88,6 +108,36 @@ namespace SwiftLocatorTest
         private class TestTransient : ITestTransient
         {
             public string Name { get; set; } = "default name";
+        }
+
+        private class TaskTransientSameInstance
+        {
+            private readonly ITestTransient _testTransient;
+
+            public TaskTransientSameInstance(ITestTransient testTransient)
+            {
+                _testTransient = testTransient;
+            }
+
+            public ITestTransient GetTestTransient()
+            {
+                return _testTransient;
+            }
+        }
+
+        private class TaskTransientScecondSameInstance
+        {
+            private readonly ITestTransient _testTransient;
+
+            public TaskTransientScecondSameInstance(ITestTransient testTransient)
+            {
+                _testTransient = testTransient;
+            }
+
+            public ITestTransient GetTestTransient()
+            {
+                return _testTransient;
+            }
         }
     }
 }

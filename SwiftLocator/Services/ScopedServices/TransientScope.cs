@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace SwiftLocator.Services.ScopedServices
 {
-    public class TransientScope : ScopeRegistrator, IServiceProvider
+    public class TransientScope : ScopeRegistrator, IServiceProvider, IServiceInstanceProvider
     {
         public new IReadOnlyDictionary<Type, Type> RealTypes => base.RealTypes;
 
@@ -19,6 +19,12 @@ namespace SwiftLocator.Services.ScopedServices
         public T Get<T>()
         {
             return (T)Get(typeof(T));
+        }
+
+        public bool TryGetInstance(Type type, out object instance)
+        {
+            instance = null;
+            return false;
         }
     }
 }

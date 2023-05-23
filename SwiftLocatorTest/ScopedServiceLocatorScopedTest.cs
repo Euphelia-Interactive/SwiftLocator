@@ -137,6 +137,27 @@ namespace SwiftLocatorTest
             Assert.AreNotEqual(singletonServiceSecondInstance.Name, testString);
         }
 
+        [TestMethod]
+        public void ServiceLocator_GetScoped_DependencyInjectionReturnsSameInstanceEveryTime()
+        {
+            // Arrange
+            const string scopeKey1 = "test scope key";
+            ServiceLocator.RestartScopedScope(scopeKey1);
+            ServiceLocator.GetScopedRegistrator(scopeKey1)
+                .Register<ITestScoped, TestScoped>()
+                .Register<TaskScopedSameInstance>()
+                .Register<TaskScopedScecondSameInstance>();
+
+            // Act
+            var instance = ServiceLocator.GetScoped<ITestScoped>(scopeKey1);
+            var secondInstance = ServiceLocator.GetScoped<TaskScopedSameInstance>(scopeKey1).GetTestScoped();
+            var thirdInstance = ServiceLocator.GetScoped<TaskScopedScecondSameInstance>(scopeKey1).GetTestScoped();
+
+            // Assert
+            Assert.AreSame(instance, secondInstance);
+            Assert.AreSame(instance, thirdInstance);
+        }
+
         private interface ITestScoped
         {
             string Name { get; set; }
@@ -145,6 +166,36 @@ namespace SwiftLocatorTest
         private class TestScoped : ITestScoped
         {
             public string Name { get; set; } = "default name";
+        }
+
+        private class TaskScopedSameInstance
+        {
+            private readonly ITestScoped _testScoped;
+
+            public TaskScopedSameInstance(ITestScoped testScoped)
+            {
+                _testScoped = testScoped;
+            }
+
+            public ITestScoped GetTestScoped()
+            {
+                return _testScoped;
+            }
+        }
+
+        private class TaskScopedScecondSameInstance
+        {
+            private readonly ITestScoped _testScoped;
+
+            public TaskScopedScecondSameInstance(ITestScoped testScoped)
+            {
+                _testScoped = testScoped;
+            }
+
+            public ITestScoped GetTestScoped()
+            {
+                return _testScoped;
+            }
         }
     }
 }
